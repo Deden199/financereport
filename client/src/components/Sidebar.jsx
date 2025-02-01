@@ -37,7 +37,7 @@ export default function Sidebar({
     { text: "Kepemilikan", path: "/kepemilikan", icon: <PaymentsIcon /> },
     { text: "Dividen", path: "/dividen", icon: <PaymentsIcon /> },
     { text: "Histori", path: "/histori", icon: <HistoryEduIcon /> },
-    { text: "Transactions", path: "/transactions", icon: <ReceiptLongIcon /> },
+    { text: "Laporan", path: "/laporan", icon: <ReceiptLongIcon /> },
   ];
 
   if (isDesktop) {

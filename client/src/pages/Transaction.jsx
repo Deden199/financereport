@@ -7,7 +7,7 @@ export default function Transactions() {
 
   const fetchTransactions = async()=>{
     try {
-      const res = await api.get('/finance/transactions');
+      const res = await api.get('/finance/transaction');
       setTransactions(res.data);
     } catch(err) {
       alert('Gagal memuat data transactions');

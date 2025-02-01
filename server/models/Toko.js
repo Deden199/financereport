@@ -23,6 +23,20 @@ const Toko = sequelize.define("Toko", {
     type: DataTypes.TEXT,
     allowNull: true,
   },
+
+  // Tambahan sesuai spreadsheet
+  totalInject: {
+    type: DataTypes.DECIMAL(20, 2),
+    defaultValue: 0
+  },
+  totalBagi: {
+    type: DataTypes.DECIMAL(20, 2),
+    defaultValue: 0
+  },
+  totalProfit: {
+    type: DataTypes.DECIMAL(20, 2),
+    defaultValue: 0
+  },
 });
 
 module.exports = Toko;

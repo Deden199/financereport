@@ -7,7 +7,7 @@ export default function Histori() {
 
   const fetchLogs = async()=>{
     try {
-      const res = await api.get('/logs'); // misal /api/logs
+      const res = await api.get('/log'); // misal /api/logs
       setLogs(res.data);
     } catch(err) {
       alert('Gagal memuat histori');

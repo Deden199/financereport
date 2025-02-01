@@ -11,7 +11,7 @@ import MasterInvestor from './pages/Investor';
 import Kepemilikan from './pages/Kepemilikan';
 import Dividen from './pages/Dividen';
 import Histori from './pages/Histori';
-import Transactions from './pages/Transaction';
+import Laporan from './pages/Laporan';
 
 function App() {
   return (
@@ -47,7 +47,7 @@ function App() {
         <Route path="histori" element={<Histori />} />
 
         {/* Transactions => /transactions */}
-        <Route path="transactions" element={<Transactions />} />
+        <Route path="laporan" element={<Laporan />} />
       </Route>
 
       {/* 404 fallback */}

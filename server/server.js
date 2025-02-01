@@ -20,7 +20,7 @@ app.use("/api/logs", logRoutes);
 // Sync DB & run server
 const PORT = process.env.PORT || 5000;
 sequelize
-  .sync({ alter: false }) // or true for dev, but careful in production
+  .sync({ alter: true }) // or true for dev, but careful in production
   .then(() => {
     console.log("Database synced");
     app.listen(PORT, () => {

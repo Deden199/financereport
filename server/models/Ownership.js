@@ -19,6 +19,23 @@ const Ownership = sequelize.define("Ownership", {
     type: DataTypes.DECIMAL(5,2),
     defaultValue: 0,
   },
+
+  // Tambahan untuk menampung data "Form Database per Investor"
+  modalAwalInv: {
+    type: DataTypes.DECIMAL(20, 2),
+    defaultValue: 0,
+    allowNull: true
+  },
+  totalInjectInv: {
+    type: DataTypes.DECIMAL(20, 2),
+    defaultValue: 0,
+    allowNull: true
+  },
+  totalBagiInv: {
+    type: DataTypes.DECIMAL(20, 2),
+    defaultValue: 0,
+    allowNull: true
+  },
 });
 
 module.exports = Ownership;

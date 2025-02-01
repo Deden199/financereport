@@ -1,56 +1,51 @@
 const sequelize = require("../config/db");
 
-// Import semua model
+// Import model
 const User = require("./User");
-const Transaction = require("./Transaction");
-const ShareDistribution = require("./ShareDistribution");
 const Log = require("./Log");
-
-// Jika pakai Toko, Investor, Dividen:
 const Toko = require("./Toko");
 const Investor = require("./Investor");
 const Dividen = require("./Dividen");
+const Transaction = require("./Transaction");
+const Ownership = require("./Ownership");
+const Histori = require("./Histori");
 
-// ======================================
-// Definisikan relasi antar-model di sini
-// ======================================
+// =============== RELASI ===============
 
-// 1. User -> Transaction
-//    1 user bisa input banyak transaction
+// 1) User ↔ Transaction (1 user banyak transaction)
 User.hasMany(Transaction, { foreignKey: "userId" });
 Transaction.belongsTo(User, { foreignKey: "userId" });
 
-// 2. User -> Log
-//    1 user bisa punya banyak log (audit trail)
+// 2) User ↔ Log (audit trail)
 User.hasMany(Log, { foreignKey: "userId" });
 Log.belongsTo(User, { foreignKey: "userId" });
 
-// 3. ShareDistribution -> Tergantung definisi
-//    Misal: 1 Toko / Project = 1 'target' di table? (Opsional)
+// 3) Toko ↔ Ownership ↔ Investor
+//    Satu Toko bisa banyak Ownership, satu Investor bisa punya banyak Ownership.
+Toko.hasMany(Ownership, { foreignKey: "tokoId" });
+Ownership.belongsTo(Toko, { foreignKey: "tokoId" });
 
-// Contoh: Toko.hasMany(Transaction, { foreignKey: "tokoId" });
-//         Transaction.belongsTo(Toko, { foreignKey: "tokoId" });
+Investor.hasMany(Ownership, { foreignKey: "investorId" });
+Ownership.belongsTo(Investor, { foreignKey: "investorId" });
 
-// Contoh: Investor belongs to Toko? Atau Many-to-Many? Tergantung bisnis
-//         Toko.hasMany(Investor, { foreignKey: "tokoId" });
-//         Investor.belongsTo(Toko, { foreignKey: "tokoId" });
+// 4) Toko ↔ Dividen
+//    Jika Dividen menempel ke Toko (1 Toko banyak Dividen).
+Toko.hasMany(Dividen, { foreignKey: "tokoId" });
+Dividen.belongsTo(Toko, { foreignKey: "tokoId" });
 
-// 4. Dividen -> Toko? (bisa saja 1 Toko banyak Dividen)
- // Toko.hasMany(Dividen, { foreignKey: "tokoId" });
- // Dividen.belongsTo(Toko, { foreignKey: "tokoId" });
+// 5) Toko ↔ Histori (opsional: jika mencatat histori perubahan di Toko)
+Toko.hasMany(Histori, { foreignKey: "tokoId" });
+Histori.belongsTo(Toko, { foreignKey: "tokoId" });
 
-// Silakan sesuaikan relationship di atas sesuai logika bisnis Anda.
-
-// ======================================
-// Ekspor Semuanya
-// ======================================
+// =============== EKSPOR SEMUA ===============
 module.exports = {
   sequelize,
   User,
-  Transaction,
-  ShareDistribution,
   Log,
   Toko,
   Investor,
   Dividen,
+  Transaction,
+  Ownership,
+  Histori,
 };

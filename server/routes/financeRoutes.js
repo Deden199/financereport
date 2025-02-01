@@ -11,10 +11,16 @@ router.get("/toko",
   financeController.getAllToko
 );
 
-// GET one Toko (opsional)
+// GET one Toko
 router.get("/toko/:id",
   authMiddleware,
   financeController.getOneToko
+);
+
+// Laporan full (Toko + Ownership + Investor + Dividen, dsb.)
+router.get("/report-full",
+  authMiddleware, // jika harus login
+  financeController.getFullReport
 );
 
 // CREATE Toko (SUPER_ADMIN)
@@ -141,8 +147,6 @@ router.put("/transaction/:transactionId/reject",
   roleMiddleware("SUPER_ADMIN"),
   financeController.rejectTransaction
 );
-
-// (opsional) put/delete => update or delete transaction?
 
 // ================== O W N E R S H I P  (KEPEMILIKAN) =================
 
